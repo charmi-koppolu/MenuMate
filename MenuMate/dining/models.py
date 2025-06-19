@@ -20,3 +20,19 @@ class Dining(models.Model):
 
     def __str__(self):
         return self.dname + "___" + str(self.did)
+
+class Favorites(models.Model):
+    fid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    fname = models.CharField(max_length=100)
+    dining = models.ForeignKey(Dining, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.fname + "___" + str(self.fid)
+
+class OTP(models.Model):
+    code = models.CharField(max_length=6)
+    email = models.CharField(primary_key=True, max_length=100)
+
+    def __str__(self):
+        return self.fname + "___" + str(self.fid)

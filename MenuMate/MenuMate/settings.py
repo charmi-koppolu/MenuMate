@@ -125,3 +125,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SENDER_EMAIL = "menumate1@gmail.com"
+
+PASSWORD = "bxvh gpzi duor jpnt"
