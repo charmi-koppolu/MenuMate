@@ -7,7 +7,7 @@ class Users(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     uname = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    token = models.CharField(max_length=100)
+    fcm_token = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     age = models.IntegerField()
 
@@ -24,7 +24,7 @@ class Dining(models.Model):
 class Favorites(models.Model):
     fid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     fname = models.CharField(max_length=100)
-    dining = models.ForeignKey(Dining, on_delete=models.CASCADE)
+    # dining = models.ForeignKey(Dining, on_delete=models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -33,6 +33,7 @@ class Favorites(models.Model):
 class OTP(models.Model):
     code = models.CharField(max_length=6)
     email = models.CharField(primary_key=True, max_length=100)
+    created_at_time = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.fname + "___" + str(self.fid)
+        return self.email + "___" + str(self.code)
