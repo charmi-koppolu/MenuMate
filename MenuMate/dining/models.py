@@ -23,7 +23,7 @@ class Dining(models.Model):
 
 class Favorites(models.Model):
     fid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    fname = models.CharField(max_length=100)
+    fname = models.CharField(unique=True, max_length=100)
     # dining = models.ForeignKey(Dining, on_delete=models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 

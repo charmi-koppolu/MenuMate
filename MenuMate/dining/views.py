@@ -10,6 +10,7 @@ import time
 
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
+from django.db import IntegrityError
 
 from .dining_information import *
 from .utility import *
@@ -87,7 +88,8 @@ def add_favorite(request):
     try:
         data = json.loads(request.body)
         fname = data["fname"].lower()
-        uid = data["uid"]
+        #uid = data["uid"]
+        uid = request.user_id
         uid = uuid.UUID(hex=uid)
         user = Users.objects.get(uid=uid)
         # did = data["did"]
@@ -95,6 +97,8 @@ def add_favorite(request):
         # dining = Dining.objects.get(did=did)
         favorite = Favorites.objects.create(fname=fname, user=user)
         return JsonResponse({"status": "Success", "message": "favorite added", "fav_info": str(favorite)}, status=200)
+    except IntegrityError:
+        return JsonResponse({"status": "Error", "message": "duplicate favorite item"}, status=300)
     except Exception as e:
         print(e)
         return JsonResponse({"status": "Error", "message": "error occurred"}, status=500)
@@ -156,6 +160,7 @@ def delete_user(request):
         print(e)
         return JsonResponse({"status": "Error", "message": "no user found"}, status=404)
 
+@csrf_exempt
 @jwt_required
 def delete_favorite(request, id):
     try:
@@ -223,9 +228,9 @@ def get_all_favorites(request):
         for favorite_entry in all_favorites:
             fav_entry = {}
             fav_entry["fid"] = favorite_entry.fid
-            fav_entry["fname"] = favorite_entry.fname
+            fav_entry["fname"] = favorite_entry.fname.title()
             #fav_entry["dining"] = model_to_dict(favorite_entry.dining)
-            fav_entry["user"] = model_to_dict(favorite_entry.user)
+            #fav_entry["user"] = model_to_dict(favorite_entry.user)
             favs.append(fav_entry)
         return JsonResponse({"status": "Success", "message": "all favorites", "data": favs}, status=200)
     except Exception as e:

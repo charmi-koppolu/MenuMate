@@ -61,16 +61,14 @@ def get_menu_items(dining_hall_name):
     hour = now.hour
     minute = now.minute
 
-    if 7 <= hour < 11:
+    if 0 <= hour < 11:
         meal_filter = "Breakfast"
     elif (hour == 11 and minute == 0) or (11 < hour < 15):
         meal_filter = "Lunch"
-    elif (hour == 16 and minute >= 30) or (17 <= hour < 21) or (hour == 21 and minute == 0):
+    elif (hour == 16 and minute >= 30) or (17 <= hour < 20) or (hour == 20 and minute == 0):
         meal_filter = "Dinner"
     else:
-        #return {}
         meal_filter = "Dinner"
-        pass
 
     menu = get_dining_hall_menu(today, meal_filter, today_url)
     print(menu)
