@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77194760378",
+    "project_id": "msu-menumate",
+    "storage_bucket": "msu-menumate.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77194760378:android:6ef801314c2e796d61f283",
+        "android_client_info": {
+          "package_name": "com.MSUMenuMate.menumate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGccvmuR9fHV73rLdNzIHpODcdUF0_WsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyAqWSer-9rjWlevJofU7EFUzduPqZc890w</string>
+	<string>AIzaSyAlv2KUUJLQPMBniXUgln_I35UVuPGflfE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>255938356939</string>
+	<string>77194760378</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.MSUMenuMate.menumate</string>
 	<key>PROJECT_ID</key>
-	<string>menumate-14764</string>
+	<string>msu-menumate</string>
 	<key>STORAGE_BUCKET</key>
-	<string>menumate-14764.firebasestorage.app</string>
+	<string>msu-menumate.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:255938356939:ios:9168d0b7c26e8c7abf9d4e</string>
+	<string>1:77194760378:ios:6ac5565f28b555f961f283</string>
 </dict>
 </plist>
