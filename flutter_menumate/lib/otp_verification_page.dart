@@ -113,7 +113,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   }
 
   Future<bool> _verifyOTPCode(String otpCode) async {
-    final Uri url = Uri.parse('http://127.0.0.1:8000/verify_otp/${widget.email}/$otpCode');
+    final Uri url = Uri.parse('http://10.0.2.2:8000/verify_otp/${widget.email}/$otpCode');
 
     try {
       final response = await http.get(url);
@@ -132,7 +132,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   }
 
   Future<bool> _registerUser() async {
-    final Uri url = Uri.parse('http://127.0.0.1:8000/user/register/');
+    final Uri url = Uri.parse('http://10.0.2.2:8000/user/register/');
 
     try {
       final response = await http.post(
@@ -156,7 +156,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   Future<void> resendOTP() async {
     setState(() => isLoading = true);
 
-    final Uri url = Uri.parse('http://127.0.0.1:8000/generate_otp/${widget.email}');
+    final Uri url = Uri.parse('http://10.0.2.2:8000/generate_otp/${widget.email}');
 
     try {
       final response = await http.get(url);

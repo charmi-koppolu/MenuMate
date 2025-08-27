@@ -48,7 +48,7 @@ class _DiningHallPageState extends State<DiningHallPage> {
       }
 
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:8000/dining/get_dining_hall/${widget.diningHallName}'),
+        Uri.parse('http://10.0.2.2:8000/dining/get_dining_hall/${widget.diningHallName}'),
         headers: AuthManager.getAuthHeader(), // Use AuthManager instead of hardcoded token
       );
 
@@ -107,7 +107,7 @@ class _DiningHallPageState extends State<DiningHallPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/favorites/add_favorite/'),
+        Uri.parse('http://10.0.2.2:8000/favorites/add_favorite/'),
         headers: {
           'Content-Type': 'application/json',
           ...AuthManager.getAuthHeader(),

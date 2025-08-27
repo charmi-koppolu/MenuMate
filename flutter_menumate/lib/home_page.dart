@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchDiningHalls() async {
-    final url = Uri.parse('http://127.0.0.1:8000/dining/get_all_dining_halls/');
+    final url = Uri.parse('http://10.0.2.2:8000/dining/get_all_dining_halls/');
     try {
       final response = await http.get(
         url,
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> fetchFavorites() async {
     setState(() => isFavoritesLoading = true);
     
-    final url = Uri.parse('http://127.0.0.1:8000/favorites/get_all_favorites/');
+    final url = Uri.parse('http://10.0.2.2:8000/favorites/get_all_favorites/');
     try {
       final response = await http.get(
         url,
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> deleteFavorite(String fid, String fname) async {
-    final url = Uri.parse('http://127.0.0.1:8000/favorites/delete/$fid');
+    final url = Uri.parse('http://10.0.2.2:8000/favorites/delete/$fid');
     try {
       final response = await http.delete(
         url,

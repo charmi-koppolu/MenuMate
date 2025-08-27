@@ -147,9 +147,9 @@ if (userId != null && userId.isNotEmpty) {
 }
 
 Future<void> sendFcmTokenToBackend(String fcmToken) async {
-  final uri = Uri.parse('http://127.0.0.1:8000/user/update/');
+  final uri = Uri.parse('http://10.0.2.2:8000/user/update/');
   final body = jsonEncode({
-    'pushToken': fcmToken,
+    'fcm_token': fcmToken,
   });
 
   final prefs = await SharedPreferences.getInstance();
@@ -332,6 +332,7 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
 
   Future<void> handleLogin() async {
+    print("111");
     final String email = emailController.text.trim();
     final String password = passwordController.text.trim();
 
@@ -342,7 +343,7 @@ class _LoginPageState extends State<LoginPage> {
 
     setState(() => isLoading = true);
 
-    final Uri url = Uri.parse('http://127.0.0.1:8000/user/login/');
+    final Uri url = Uri.parse('http://10.0.2.2:8000/user/login/');
 
     try {
       final response = await http.post(
@@ -350,6 +351,9 @@ class _LoginPageState extends State<LoginPage> {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'email': email, 'password': password}),
       );
+      print(response.statusCode);
+      print(response.body);
+      print(url);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -376,6 +380,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       _showSnackBar('Network error. Please try again.');
+      print(e);
     } finally {
       setState(() => isLoading = false);
     }
