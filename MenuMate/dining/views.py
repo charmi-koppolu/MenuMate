@@ -68,8 +68,9 @@ def get_all_dining_halls(request):
 @jwt_required
 def get_dining_hall(request, name):
     menu_items = get_menu_items(name)
-    if menu_items == {}:
-        return JsonResponse({"status": "Error", "message": "Dining Hall is closed"}, status=404)
+    print(menu_items)
+    if menu_items == {} or menu_items == None or len(menu_items) == 0:
+        return JsonResponse({"status": "Error", "message": "Dining Hall is closed"}, status=414)
     return JsonResponse({"status": "Success", "message": menu_items}, status=200)
 
 def add_dining_hall(request):
@@ -88,17 +89,15 @@ def add_favorite(request):
     try:
         data = json.loads(request.body)
         fname = data["fname"].lower()
-        #uid = data["uid"]
         uid = request.user_id
         uid = uuid.UUID(hex=uid)
         user = Users.objects.get(uid=uid)
-        # did = data["did"]
-        # did = uuid.UUID(hex=did)
-        # dining = Dining.objects.get(did=did)
-        favorite = Favorites.objects.create(fname=fname, user=user)
-        return JsonResponse({"status": "Success", "message": "favorite added", "fav_info": str(favorite)}, status=200)
-    except IntegrityError:
-        return JsonResponse({"status": "Error", "message": "duplicate favorite item"}, status=300)
+        favorite = Favorites.objects.filter(user=user, fname=fname)
+        print(favorite, len(favorite))
+        if len(favorite) == 0:
+            favorite = Favorites.objects.create(fname=fname, user=user)
+            return JsonResponse({"status": "Success", "message": "favorite added", "fav_info": str(favorite)}, status=200)
+        return JsonResponse({"status": "Error", "message": "duplicate favorite item", "fav_info": str(favorite)}, status=300)
     except Exception as e:
         print(e)
         return JsonResponse({"status": "Error", "message": "error occurred"}, status=500)
@@ -172,8 +171,11 @@ def delete_favorite(request, id):
         print(e)
         return JsonResponse({"status": "Error", "message": "no favorite entry found"}, status=404)
 
+@csrf_exempt
 @jwt_required
 def update_user(request):
+    print(request.method)
+    print(request.body)
     try:
         uid = uuid.UUID(request.user_id)
         user = update_user_info(request, uid)

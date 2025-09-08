@@ -29,7 +29,6 @@ from functools import wraps
 def jwt_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
-        print("hi")
         auth_header = request.headers.get('Authorization')
 
         if not auth_header:

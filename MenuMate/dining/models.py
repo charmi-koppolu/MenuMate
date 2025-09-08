@@ -7,7 +7,7 @@ class Users(models.Model):
     uid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     uname = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
-    fcm_token = models.CharField(max_length=100)
+    fcm_token = models.CharField(max_length=2000)
     email = models.CharField(max_length=100)
     age = models.IntegerField()
 
@@ -23,9 +23,13 @@ class Dining(models.Model):
 
 class Favorites(models.Model):
     fid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    fname = models.CharField(unique=True, max_length=100)
+    fname = models.CharField(max_length=100)
     # dining = models.ForeignKey(Dining, on_delete=models.CASCADE)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+    class Meta:
+        # This ensures each user can only favorite the same item once
+        unique_together = ('user', 'fname')
 
     def __str__(self):
         return self.fname + "___" + str(self.fid)

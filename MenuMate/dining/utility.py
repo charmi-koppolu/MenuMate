@@ -13,7 +13,7 @@ def update_user_info(request, uid):
     email = data.get("email")
     age = data.get("age")
     user = Users.objects.get(uid=uid)
-
+    print(fcm_token)
     if username is not None:
         user.uname = username
     if password is not None:
@@ -35,7 +35,7 @@ dining_hall_urls = {"Akers": "https://eatatstate.msu.edu/menu/The%20Edge%20at%20
                     "Holden": "https://eatatstate.msu.edu/menu/Holden%20Dining%20Hall/all/",
                     "Holmes": "https://eatatstate.msu.edu/menu/Holmes%20Dining%20Hall/all/",
                     "Landon": "https://eatatstate.msu.edu/menu/Heritage%20Commons%20at%20Landon/all/",
-                    "Owen": "https://eatatstate.msu.edu/menu/Thrive%20at%20Owen",
+                    "Owen": "https://eatatstate.msu.edu/menu/Thrive%20at%20Owen/",
                     "Shaw": "https://eatatstate.msu.edu/menu/The%20Vista%20at%20Shaw/all/",
                     "Snyder Phillips": "https://eatatstate.msu.edu/menu/The%20Gallery%20at%20Snyder%20Phillips/all/"
                     }
@@ -53,6 +53,7 @@ def get_dining_format(dining_hall_name, dining_hall_menu, today):
 
 def get_menu_items(dining_hall_name):
     url = dining_hall_urls[dining_hall_name]
+    print(url)
     today = datetime.now(ZoneInfo("America/Detroit")).strftime("%Y-%m-%d")
     print(today)
     today_url = url
@@ -65,10 +66,11 @@ def get_menu_items(dining_hall_name):
         meal_filter = "Breakfast"
     elif (hour == 11 and minute == 0) or (11 < hour < 15):
         meal_filter = "Lunch"
-    elif (hour == 16 and minute >= 30) or (17 <= hour < 20) or (hour == 20 and minute == 0):
+    elif (hour == 16 and minute >= 30) or (hour == 20 and minute == 0):
         meal_filter = "Dinner"
     else:
         meal_filter = "Dinner"
+        #return None
 
     menu = get_dining_hall_menu(today, meal_filter, today_url)
     print(menu)
