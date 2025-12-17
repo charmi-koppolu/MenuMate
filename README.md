@@ -19,7 +19,7 @@ Tech Stack
 ### Frontend  
 - **Framework**: Flutter  
 - **Language**: Dart  
-- **Packages**: `shared_preferences`, navigation, Firebase for notifications  
+- **Packages**: shared preferences, navigation, Firebase for notifications  
 
 ### Backend  
 - **Framework**: Django  
